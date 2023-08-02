@@ -6,3 +6,5 @@
 **/sonar-project.properties
 **/.scannerwork
 **/*.log
+**/config
+**/custom-environment-variables.json
