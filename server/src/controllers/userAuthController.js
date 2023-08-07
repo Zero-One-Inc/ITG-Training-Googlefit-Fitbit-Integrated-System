@@ -1,9 +1,9 @@
 
 import bcrypt from "bcrypt";
 import config from "config";
-import jwt from "jsonwebtoken";
 import User from "../models/Users";
-import { ref } from "joi";
+import jwt from "jsonwebtoken";
+import {generateAuthToken, generateAuthRefreshToken} from "../services/userServices/userAuth.js";
 
 export const register = async (req, res) => {
     try {
@@ -34,16 +34,6 @@ export const register = async (req, res) => {
     }
 }
 
-const generateAuthToken = (user) => {
-    const token = jwt.sign({userID: user._id, email: user.email}, config.get("JWT_TOKEN_KEY"), {expiresIn: "15s"});
-    return token;
-}
-
-const generateAuthRefreshToken = (user) => {
-    const refreshToken = jwt.sign({userID: user._id, email: user.email}, config.get("JWT_REFRESH_TOKEN_KEY"), {expiresIn: "1m"});
-    return refreshToken;
-}
-
 export const login = async (req, res) => {
     const user = await User.findOne({email: req.body.email});
 
@@ -62,17 +52,40 @@ export const login = async (req, res) => {
     const token = generateAuthToken(user);
     const refreshToken = generateAuthRefreshToken(user);
 
-    res.set({
-        USER_TOKEN: token,
-        USER_REFRESH_TOKEN: refreshToken
-    })
+    res.set("userID", user._id);
+    res.set("USER_TOKEN", token);
+    res.set("USER_REFRESH_TOKEN", refreshToken);
 
-    res.status(200).send({token: token, refreshToken: refreshToken});
+    res.status(200).send("Loged in.");
 }
 
 export const logout = (req, res) => {
     
 }
+
+export const renewAuthToken = (req, res) => {
+    const refreshToken = req.header("USER_REFRESH_TOKEN").split(" ")[1];
+    
+    if (!refreshToken){
+        return res.status(401).send("Access denied, Unauthorized user.");
+    }
+
+    try {
+        const decode = jwt.verify(refreshToken, config.get("JWT_REFRESH_TOKEN_KEY"));
+        
+        const newUserAccessToken = generateAuthToken(decode);
+
+        res.set("USER_TOKEN", newUserAccessToken);
+        res.set("USER_REFRESH_TOKEN", refreshToken);
+        res.user = decode;
+
+        res.status(200).send("Token refreshed.");
+    } catch (error) {
+        console.log(error.message);
+        res.status(400).send("Invalid token;");
+    }
+}
+
 
 export const deleteUser = async (req, res) => {
     try {

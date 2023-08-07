@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
+    _id: mongoose.Types.ObjectId,
     firstName: {
         type: String,
         maxlength: 50,
@@ -30,6 +31,14 @@ const userSchema = mongoose.Schema({
         maxlength: 255,
         minlength: 6,
         required: true,
+    },
+    googleFitToken: {
+        type: String,
+        maxlength:255
+    },
+    fitbitToken: {
+        type: String,
+        maxlength:255
     }
 });
 
