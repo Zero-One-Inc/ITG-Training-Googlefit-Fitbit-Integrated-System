@@ -1,7 +1,6 @@
 
 import jwt from "jsonwebtoken";
 import config from "config";
-import {generateAuthToken} from "../services/userServices/userAuth.js";
 
 const verifyToken = (req, res, next) => {
     const token = req.header("USER_TOKEN").split(" ")[1];

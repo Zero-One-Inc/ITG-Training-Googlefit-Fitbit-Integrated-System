@@ -52,7 +52,10 @@ export const login = async (req, res) => {
     const token = generateAuthToken(user);
     const refreshToken = generateAuthRefreshToken(user);
 
-    res.set("userID", user._id);
+    res.set("user", {
+        userID: user._id,
+        email: user.email
+    });
     res.set("USER_TOKEN", token);
     res.set("USER_REFRESH_TOKEN", refreshToken);
 
@@ -77,7 +80,7 @@ export const renewAuthToken = (req, res) => {
 
         res.set("USER_TOKEN", newUserAccessToken);
         res.set("USER_REFRESH_TOKEN", refreshToken);
-        res.user = decode;
+        res.set("user", decode);
 
         res.status(200).send("Token refreshed.");
     } catch (error) {
