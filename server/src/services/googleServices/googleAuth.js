@@ -1,35 +1,39 @@
 
 import GoogleOAuth20 from "passport-google-oauth20";
 import config from "config";
-import User from "../../models/Users.js";
+import GoogleFitCredential from "../../models/GoogleFitCredential.js";
 
-const googleStratigy = async (userID) => {
-    return GoogleOAuth20.Strategy({
+const googleStrategy = async (userID) => {
+
+    return new (GoogleOAuth20.Strategy)({
         clientID: config.get("GOOGLE_CLIENT_ID"),
         clientSecret: config.get("GOOGLE_SECRET_KEY"),
-        callbackURL: "GOOGLE_CALLBACK_URL"
+        callbackURL: config.get("GOOGLE_CALLBACK_URL")
     },
     async (accessToken, refreshToken, profile, verifyCallback) => {
-        let user = await User.findOne({
-            googleFitToken: accessToken
-        });
+        try {
+            let googleFitCredential = await GoogleFitCredential
+            .findOne({userID: userID})
+            .sort("date")
 
-        if (!user){
-            user = await User.findById(userID);
-
-            if (!user){
-                return verifyCallback(err, fasle);
+            if (!googleFitCredential || googleFitCredential.isRevoked){
+                googleFitCredential = new GoogleFitCredential({
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    userID: userID,
+                    isRevoked: false
+                });
+                
+                await googleFitCredential.save();
+    
+                return verifyCallback(null, googleFitCredential);
             }
-
-            user.set({
-                googleAuthinticate: accessToken,
-            })
-
-            return verifyCallback(err, user);
+            
+            return verifyCallback(null, accessToken);
+        } catch (error) {
+            return verifyCallback(error, null);
         }
-
-        return verifyCallback(err, user);
     });
 }
 
-export default googleStratigy;
+export default googleStrategy;

@@ -10,6 +10,6 @@ router.get("/",
         
         res.status(200).send("Opened");
     }
-    );
+);
 
 export default router;
