@@ -32,13 +32,10 @@ const userSchema = mongoose.Schema({
         minlength: 6,
         required: true,
     },
-    googleFitToken: {
-        type: String,
-        maxlength:255
-    },
-    fitbitToken: {
-        type: String,
-        maxlength:255
+    isLogedOut: {
+        type: Boolean,
+        required: true,
+        default: true
     }
 });
 

@@ -1,7 +1,7 @@
 
 import express from "express";
 import { registerValidation, loginValidation } from "../middlewares/validation/user.js";
-import {register, login, renewAuthToken} from "../controllers/userAuthController.js";
+import {register, login} from "../controllers/userAuthController.js";
 
 const router = express.Router();
 
@@ -13,10 +13,6 @@ router.post("/register",
 router.post("/login", 
     (req, res, next) => loginValidation(req, res, next),
     async (req, res) => await login (req, res) 
-);
-
-router.post("/renewAuthToken", 
-    (req, res) => renewAuthToken(req, res)
 );
 
 export default router;

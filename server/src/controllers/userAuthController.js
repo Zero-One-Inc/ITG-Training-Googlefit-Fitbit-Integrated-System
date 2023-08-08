@@ -2,8 +2,8 @@
 import bcrypt from "bcrypt";
 import config from "config";
 import User from "../models/Users";
-import jwt from "jsonwebtoken";
 import {generateAuthToken, generateAuthRefreshToken} from "../services/userServices/userAuth.js";
+import GoogleFitCredential from "../models/GoogleFitCredential";
 
 export const register = async (req, res) => {
     try {
@@ -22,7 +22,8 @@ export const register = async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            isLogedOut: true
         });
         
         user = await user.save();
@@ -58,37 +59,35 @@ export const login = async (req, res) => {
     });
     res.set("USER_TOKEN", token);
     res.set("USER_REFRESH_TOKEN", refreshToken);
-
-    res.status(200).send("Loged in.");
-}
-
-export const logout = (req, res) => {
     
-}
+    await user.updateOne({isLogedOut: false});
 
-export const renewAuthToken = (req, res) => {
-    const refreshToken = req.header("USER_REFRESH_TOKEN").split(" ")[1];
-    
-    if (!refreshToken){
-        return res.status(401).send("Access denied, Unauthorized user.");
+    const result = {
+        message: "Loged in.",
+        user: {
+            userID: user._id,
+            email: user.email
+        }
     }
 
+    res.status(200).send(result);
+}
+
+export const logout = async (req, res) => {
     try {
-        const decode = jwt.verify(refreshToken, config.get("JWT_REFRESH_TOKEN_KEY"));
-        
-        const newUserAccessToken = generateAuthToken(decode);
+        const user = await User.findById({_id: req.user.userID});
+        let googleFitCredential = await GoogleFitCredential
+        .findOne({userID: req.user.userID})
+        .sort("date")
 
-        res.set("USER_TOKEN", newUserAccessToken);
-        res.set("USER_REFRESH_TOKEN", refreshToken);
-        res.set("user", decode);
-
-        res.status(200).send("Token refreshed.");
+        await user.updateOne({isLogedOut: true});
+        await googleFitCredential.updateOne({isRevoked: true});
+        res.status(200).send("User loged out.");
     } catch (error) {
         console.log(error.message);
-        res.status(400).send("Invalid token;");
+        res.status(500).send(error.message);
     }
 }
-
 
 export const deleteUser = async (req, res) => {
     try {
@@ -104,6 +103,7 @@ export const deleteUser = async (req, res) => {
 
         return true;
     } catch (error) {
-        throw error;
+        console.log(error.message);
+        res.status(500).send(error.message);
     }
 }
