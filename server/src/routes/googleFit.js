@@ -1,15 +1,13 @@
 
 import express from "express";
-import verifyToken from "../middlewares/userAuth.js";
+import verifyUserToken from "../middlewares/userAuth.js";
+import getGoogleFitData from "../controllers/googleFitController.js";
 
 const router = express.Router();
 
-router.get("/",
-    (req, res, next) => verifyToken(req, res, next),
-    (req, res) => {
-        
-        res.status(200).send("Opened");
-    }
+router.get("/", 
+    async (req, res, next) => await verifyUserToken(req, res, next),
+    async (req, res) => await getGoogleFitData(req, res)
 );
 
 export default router;

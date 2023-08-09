@@ -21,11 +21,6 @@ const googleFitCredentialSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
-    },
-    isRevoked: {
-        type: Boolean,
-        default: false,
-        required: true
     }
 });
 

@@ -2,6 +2,7 @@
 import "dotenv/config";
 import config from "config";
 import express from "express";
+import session from "express-session";
 import connectDB from "./middlewares/databaseConnection";
 import authRoute from "./routes/userAuth";
 import googleFitAuthRoute from "./routes/googleFitAuth.js";
@@ -12,8 +13,23 @@ connectDB();
 
 const app = express();
 
+const sessionOptions = {
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {}
+}
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy
+  sessionOptions.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sessionOptions))
 
 app.use(passport.initialize());
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

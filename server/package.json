@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Zero-One-Inc/ITG-Training-Google-Fit-and-Fitbit-Health-Data-Integration#readme",
   "dependencies": {
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "config": "^3.3.9",
     "dotenv": "^16.3.1",

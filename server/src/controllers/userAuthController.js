@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import config from "config";
 import User from "../models/Users";
 import {generateAuthToken, generateAuthRefreshToken} from "../services/userServices/userAuth.js";
-import GoogleFitCredential from "../models/GoogleFitCredential";
+import { revokeGoogleFitCredentials } from "../services/googleServices/googleAuth";
 
 export const register = async (req, res) => {
     try {
@@ -49,14 +49,10 @@ export const login = async (req, res) => {
         console.log("Wrong Password");
         return res.status(404).send("Wrong Password");
     }
-
+    
     const token = generateAuthToken(user);
     const refreshToken = generateAuthRefreshToken(user);
 
-    res.set("user", {
-        userID: user._id,
-        email: user.email
-    });
     res.set("USER_TOKEN", token);
     res.set("USER_REFRESH_TOKEN", refreshToken);
     
@@ -75,13 +71,8 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        const user = await User.findById({_id: req.user.userID});
-        let googleFitCredential = await GoogleFitCredential
-        .findOne({userID: req.user.userID})
-        .sort("date")
+        await revokeGoogleFitCredentials(req.user.userID);
 
-        await user.updateOne({isLogedOut: true});
-        await googleFitCredential.updateOne({isRevoked: true});
         res.status(200).send("User loged out.");
     } catch (error) {
         console.log(error.message);

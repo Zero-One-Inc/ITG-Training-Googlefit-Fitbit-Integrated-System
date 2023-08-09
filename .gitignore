@@ -8,3 +8,5 @@
 **/*.log
 **/config
 **/custom-environment-variables.json
+**/text.txt
+**/tmp.json
