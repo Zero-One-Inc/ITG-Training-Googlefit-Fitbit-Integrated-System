@@ -4,14 +4,16 @@ import config from "config";
 import User from "../models/Users";
 import {generateAuthToken, generateAuthRefreshToken} from "../services/userServices/userAuth.js";
 import { revokeGoogleFitCredentials } from "../services/googleServices/googleAuth";
+import logger, {formateLoggerMessage} from "../middlewares/logger";
 
 export const register = async (req, res) => {
     try {
         let user = await User.findOne({email: req.body.email});
 
         if(user){
-            console.log("This user is already registerd");
-            return res.status(400).send("This user is already registerd");
+            const errorMessage = "This user is already registered.";
+            logger.error(formateLoggerMessage(400, errorMessage));
+            return res.status(400).send();
         }
 
         const SALT = await bcrypt.genSalt(Number(config.get("SALT")));
@@ -28,9 +30,11 @@ export const register = async (req, res) => {
         
         user = await user.save();
 
-        res.status(200).send(user);   
+        const message = "User registered successfully";
+        logger.info(formateLoggerMessage(200, message));
+        res.status(200).send(user);
     } catch (error) {
-        console.log(error.message);
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 }

@@ -1,7 +1,8 @@
 
+import config from "config";
 import { fetchGoogleFitData } from "../services/googleServices/googleData";
 import { getGoogleFitCredential } from "../services/googleServices/googleAuth"; 
-import config from "config";
+import logger, {formateLoggerMessage} from "../middlewares/logger";
 
 const getGoogleFitData = async (req, res) => {
     try {
@@ -10,8 +11,9 @@ const getGoogleFitData = async (req, res) => {
         const googleFitCredential = await getGoogleFitCredential(userID);
         
         if (!googleFitCredential){
-            console.log("Not Connected to Google accout.");
-            return res.status(401).send("Not Connected to Google accout.");
+            const errorMessage = "Unauthorized access to Google Fit";
+            logger.error(formateLoggerMessage(401, errorMessage));
+            return res.status(401).send(errorMessage);
         }
 
         const dataTypes = req.body.dataTypes;
@@ -35,9 +37,11 @@ const getGoogleFitData = async (req, res) => {
             }
         }
         
+        const message = "Data has been fetched successfully.";
+        logger.info(formateLoggerMessage(200, message));
         return res.status(200).send(fetchedData);
     } catch (error) {
-        console.log(error.message);
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 } 

@@ -2,11 +2,13 @@
 import jwt from "jsonwebtoken";
 import config from "config";
 import { generateAuthToken } from "../services/userServices/userAuth";
+import logger, {formateLoggerMessage} from "./logger";
 
 const verifyUserToken = (req, res, next) => {
     const token = req.header("USER_TOKEN").split(" ")[1];
-
     if (!token) {
+        const errorMessage = "Access denied, Unauthorized access";
+        logger.error(formateLoggerMessage(401, errorMessage));
         return res.status(401).send("Access denied, Unauthorized user.");
     }
 
@@ -25,9 +27,10 @@ const verifyUserToken = (req, res, next) => {
 
 const renewAuthToken = (req, res, next) => {
     const refreshToken = req.header("USER_REFRESH_TOKEN").split(" ")[1];
-    
     if (!refreshToken) {
-        return res.status(401).send("Access denied, Unauthorized user.");
+        const errorMessage = "Access denied, Unauthorized access";
+        logger.error(formateLoggerMessage(401, errorMessage));
+        return res.status(401).send(errorMessage);
     }
 
     try {
@@ -41,8 +44,9 @@ const renewAuthToken = (req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error.message);
-        res.status(400).send("Invalid token");
+        const errorMessage = "Invalid token";
+        logger.error(formateLoggerMessage(400, errorMessage));
+        res.status(400).send(errorMessage);
     }
 }
 

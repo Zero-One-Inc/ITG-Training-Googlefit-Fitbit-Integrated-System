@@ -8,10 +8,22 @@ import authRoute from "./routes/userAuth";
 import googleFitAuthRoute from "./routes/googleFitAuth.js";
 import googleFitServicesRoute from "./routes/googleFit.js";
 import passport from "passport";
+import winston from "winston";
+import logger, {formateLoggerMessage} from "./middlewares/logger.js";
 
 connectDB();
 
 const app = express();
+
+process.on("uncaughtException", (error) => {
+    logger.error(formateLoggerMessage(500, error.message));
+    process.exit(1);
+});
+
+process.on("unhandledRejection", (error) => {
+    logger.error(formateLoggerMessage(500, error.message));
+    process.exit(1);
+});
 
 const sessionOptions = {
   secret: 'keyboard cat',
@@ -26,10 +38,7 @@ if (app.get('env') === 'production') {
 }
 
 app.use(session(sessionOptions))
-
 app.use(passport.initialize());
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -41,5 +50,6 @@ app.get("/profile", (req, res) => {res.status(200).send("Inside Profile")});
 const PORT = config.get("PORT") || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Listening on: http://localhost:${PORT}`);
+    const message = `Listening on: http://localhost:${PORT}`;
+    logger.info(formateLoggerMessage(200, message));
 })

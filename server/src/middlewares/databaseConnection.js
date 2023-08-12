@@ -1,14 +1,16 @@
 
 import config from "config";
 import mongoose from "mongoose";
+import logger,{formateLoggerMessage} from "./logger";
 
 const connectDB = async () => {
     await mongoose.connect(config.get("DATABASE_URL"))
     .then(() => {
-        console.log("Database connected.");
+        const message = "Database connection established.";
+        logger.info(200, message);
     })
     .catch((error) => {
-        console.log(error.message);
+        logger.error(500, formateLoggerMessage(error));
     });
 }
 

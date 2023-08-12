@@ -3,6 +3,7 @@ import GoogleOAuth20 from "passport-google-oauth20";
 import config from "config";
 import GoogleFitCredential from "../../models/GoogleFitCredential.js";
 import axios from "axios";
+import logger, {formateLoggerMessage} from "../../middlewares/logger.js";
 
 const googleStrategy = async (userID) => {
     return new (GoogleOAuth20.Strategy)({
@@ -26,12 +27,18 @@ const googleStrategy = async (userID) => {
                 });
                 
                 await googleFitCredential.save();
-    
+                
+                const message = "Google Fit credential saved successfully.";
+                logger.info(200, message);
+
                 return verifyCallback(null, googleFitCredential);
             }
             
             return verifyCallback(null, accessToken);
         } catch (error) {
+            const errorMessage = "Google Fit credential error: " + error.message;;
+            logger.info(500, errorMessage);
+
             return verifyCallback(error, null);
         }
     });
@@ -68,7 +75,8 @@ export const getNewGoogleAccessToken = async (googleFitCredential) => {
 
         return googleFitCredential;
     } catch (error) {
-        console.log(error);
+
+        logger.error(formateLoggerMessage(500, error.message));
         await googleFitCredential.deleteOne();
         return null;
     }

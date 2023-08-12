@@ -1,6 +1,7 @@
 
 import Joi from "joi";
 import joiObjecid from "joi-objectid";
+import logger, {formateLoggerMessage} from "../logger";
 
 Joi.objectId = joiObjecid(Joi);
 
@@ -16,13 +17,14 @@ export const registerValidation = (req, res, next) => {
         const { error } = schema.validate(req.body);
     
         if (error){
-            console.log(error.details[0].message);
+            logger.error(formateLoggerMessage(400, error.details[0].message));
             return res.status(400).send(error.details[0].message);
         }
     
         next();   
     } catch (error) {
         console.log(error.message);
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 }
@@ -38,12 +40,13 @@ export const loginValidation = (req, res, next) => {
     
         if (error){
             console.log(error.details[0].message);
+            logger.error(formateLoggerMessage(400, error.details[0].message));
             return res.status(400).send(error.details[0].message);
         }
     
         next();   
     } catch (error) {
-        console.log(error.message);
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 } 
