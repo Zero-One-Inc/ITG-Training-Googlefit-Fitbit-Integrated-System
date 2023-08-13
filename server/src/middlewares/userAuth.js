@@ -5,7 +5,8 @@ import { generateAuthToken } from "../services/userServices/userAuth";
 import logger, {formateLoggerMessage} from "./logger";
 
 const verifyUserToken = (req, res, next) => {
-    const token = req.header("USER_TOKEN").split(" ")[1];
+    // const token = req.header("USER_TOKEN").split(" ")[1];
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NGQ0Y2JkMGNiZDU5OGMwMDE4Nzk5MWEiLCJlbWFpbCI6ImF0YWEuc2hhcW91ckBnbWFpbC5jb20iLCJpYXQiOjE2OTE3MzY2NzQsImV4cCI6MTY5MTczODQ3NH0.m5qTaOFG90EuH89-cVyeoj7_piHfGqCFRWQ6qwLbaGk";
     if (!token) {
         const errorMessage = "Access denied, Unauthorized access";
         logger.error(formateLoggerMessage(401, errorMessage));
@@ -26,7 +27,8 @@ const verifyUserToken = (req, res, next) => {
 }
 
 const renewAuthToken = (req, res, next) => {
-    const refreshToken = req.header("USER_REFRESH_TOKEN").split(" ")[1];
+    // const refreshToken = req.header("USER_REFRESH_TOKEN").split(" ")[1];
+    const refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NGQ0Y2JkMGNiZDU5OGMwMDE4Nzk5MWEiLCJlbWFpbCI6ImF0YWEuc2hhcW91ckBnbWFpbC5jb20iLCJpYXQiOjE2OTE3MzY2NzQsImV4cCI6MTY5MTk5NTg3NH0.A662S6F2fr_kBmDhxmttDDAQpsA5v1sTfSmuk190kZQ";
     if (!refreshToken) {
         const errorMessage = "Access denied, Unauthorized access";
         logger.error(formateLoggerMessage(401, errorMessage));

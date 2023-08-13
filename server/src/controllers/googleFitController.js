@@ -17,14 +17,21 @@ const getGoogleFitData = async (req, res) => {
         }
 
         const dataTypes = req.body.dataTypes;
+        const GOOGLE_FIT_DATA_TYPES = Object.keys(JSON.parse(config.get("GOOGLE_DATA_TYPE_NAME")));
 
-        const groupTimeBy = new Object(JSON.parse(config.get("GROUP_TIME_BY")))[req.body.groupTimeBy];
+        const groupByTime = new Object(JSON.parse(config.get("GROUP_TIME_BY")))[req.body.groupByTime];
         const fetchedData = {};
 
         for(const dataType of dataTypes){
-            const dataList = await fetchGoogleFitData(req.body.startTime, req.body.endTime, groupTimeBy, dataType, googleFitCredential);
+            const dataList = await fetchGoogleFitData(req.body.startTime, req.body.endTime, groupByTime, dataType, googleFitCredential);
             
             if (dataList === null){
+                const formatedData = {};
+                formatedData[dataType] = "-1";
+                const dates = Object.keys(fetchedData);
+                for (const date of dates){
+                    fetchedData[date].push(formatedData);
+                }
                 continue;
             }
             

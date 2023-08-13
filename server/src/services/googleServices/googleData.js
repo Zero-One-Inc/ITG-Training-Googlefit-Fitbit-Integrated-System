@@ -8,10 +8,8 @@ export const fetchGoogleFitData = async (startTime, endTime, groupTimeBy, dataTy
         const data =  await fetchGoogleFitDataCall(startTime, endTime, groupTimeBy, dataType, googleFitCredential.accessToken);
         return data;
     } catch (error) {
-        console.log(error.cause.code)
         if (error.cause.code == "401"){
             googleFitCredential = await getNewGoogleAccessToken(googleFitCredential);
-            console.log(googleFitCredential);
             if (!googleFitCredential){
                 throw new Error("Invalid Token, You should reconnect with google account.");
             }
@@ -45,7 +43,7 @@ const fetchGoogleFitDataCall = async (startTime, endTime, groupTimeBy, dataType,
                 "endTimeMillis": endTime
             }
         });
-        
+
         return mapGoogleFitData(dataBucketResponse.data.bucket, dataType);
     } catch (error) {
         
@@ -59,19 +57,14 @@ const fetchGoogleFitDataCall = async (startTime, endTime, groupTimeBy, dataType,
 
 export const mapGoogleFitData = (data, dataTypeName) => {
     const mapedData = [];
-    const formatedData = {};
 
     for (const dataItem of data) {
+        const formatedData = {};
         let dataValue = null;
         let dateString = new Date(parseInt(dataItem.startTimeMillis));
         dateString = dateString.toISOString().split('T')[0];
         
         if (dataItem.dataset[0].point[0] == undefined){
-            // formatedData[dataTypeName] = "-1";
-            // return [{
-            //     date: dateString,
-            //     data: formatedData
-            // }];
             return null;
         }
 
@@ -92,6 +85,5 @@ export const mapGoogleFitData = (data, dataTypeName) => {
             data: formatedData
         });
     }
-
     return mapedData;   
 }

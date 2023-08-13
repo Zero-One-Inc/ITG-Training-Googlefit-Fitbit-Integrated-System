@@ -11,7 +11,7 @@ const googleStrategy = async (userID) => {
         clientSecret: config.get("GOOGLE_SECRET_KEY"),
         callbackURL: config.get("GOOGLE_CALLBACK_URL"),
         pkce: true,
-        state: true
+        state: true,
     },
     async (accessToken, refreshToken, profile, verifyCallback) => {
         try {
@@ -65,7 +65,7 @@ export const getNewGoogleAccessToken = async (googleFitCredential) => {
                 client_id: config.get("GOOGLE_CLIENT_ID"),
                 client_secret: config.get("GOOGLE_SECRET_KEY"),
                 refresh_token: googleFitCredential.refreshToken,
-                grant_type: "refresh_token"
+                grant_type: "refresh_token",
             }
         });
         

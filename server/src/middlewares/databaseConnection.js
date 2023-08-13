@@ -7,10 +7,10 @@ const connectDB = async () => {
     await mongoose.connect(config.get("DATABASE_URL"))
     .then(() => {
         const message = "Database connection established.";
-        logger.info(200, message);
+        logger.info(formateLoggerMessage(200, message));
     })
     .catch((error) => {
-        logger.error(500, formateLoggerMessage(error));
+        logger.error(formateLoggerMessage(500, error.message));
     });
 }
 

@@ -43,15 +43,17 @@ export const login = async (req, res) => {
     const user = await User.findOne({email: req.body.email});
 
     if (!user){
-        console.log("There is no user that have this email.");
-        return res.status(404).send("There is no user that have this email.");
+        const errorMessage = "User not found";
+        logger.error(formateLoggerMessage(404, errorMessage));
+        return res.status(404).send(errorMessage);
     }
 
     const isMatchedPassword = await bcrypt.compare(req.body.password, user.password);
 
     if(!isMatchedPassword){
-        console.log("Wrong Password");
-        return res.status(404).send("Wrong Password");
+        const errorMessage = "Wrong Password";
+        logger.error(formateLoggerMessage(400, errorMessage));
+        return res.status(400).send(errorMessage);
     }
     
     const token = generateAuthToken(user);
@@ -70,16 +72,19 @@ export const login = async (req, res) => {
         }
     }
 
+    logger.info(formatMessage(200, result.message));
     res.status(200).send(result);
 }
 
 export const logout = async (req, res) => {
     try {
         await revokeGoogleFitCredentials(req.user.userID);
-
-        res.status(200).send("User loged out.");
+        
+        const message = "Logged out";
+        logger.info(formatMessage(200, message));
+        res.status(200).send(message);
     } catch (error) {
-        console.log(error.message);
+        logger.error(formatMessage(500, error.message));
         res.status(500).send(error.message);
     }
 }
@@ -89,16 +94,20 @@ export const deleteUser = async (req, res) => {
         const user = await User.findById({_id: req.params.userID});
 
         if (!user){
-            console.log("This user doesn't exist.");
+            const errorMessage = "This user doesn't exist.";
+            logger.error(formateLoggerMessage(404, errorMessage));
             res.status(404).redirect("/login");
         }
 
         await user.deleteOne();
+        
+        const message = "User deleted successfully";
+        logger.info(formateLoggerMessage(200, message));
         res.status(200).redirect("/register");
 
         return true;
     } catch (error) {
-        console.log(error.message);
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 }
