@@ -65,10 +65,10 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response:  
-			  200 => success
-			  400 => Bad request 
-			  404 => User doesn't exist.
-			  500 => Server-side error
+			  200 => success  
+			  400 => Bad request  
+			  404 => User doesn't exist.  
+			  500 => Server-side error  
 	  - Register:
 		  - URL: "http://localhost:3000/auth/user/register"
 		  - Method: POST
@@ -96,8 +96,8 @@ The objective of this task is to Create a robust and secure integration between 
 				}
 			  ```
 		  - Response:  
-			  200 => success
-			  500 => Server-side error
+			  200 => success  
+			  500 => Server-side error  
 	  - Delete:
 		  - URL: "http://localhost:3000/auth/user/logout:userID"
 		  - Method: DELETE
@@ -110,8 +110,8 @@ The objective of this task is to Create a robust and secure integration between 
 			  ```
 				   
 		  - Response:  
-			  200 => success
-			  500 => Server-side error
+			  200 => success  
+			  500 => Server-side error  
   - **Google Authentication End-Points:**
 	  - Create Google Fit Credentials:
 		  - URLs:  
@@ -149,7 +149,7 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response: 
-			  200 => success
+			  200 => success  
 			  ``` json
 			  {
 				"2023-08-06": [
@@ -172,9 +172,9 @@ The objective of this task is to Create a robust and secure integration between 
 				], 
 			  }
 			   ```
-			  400 => bad request
-			  401 => Unauthorized access
-			  500 => Server-side error 
+			  400 => bad request  
+			  401 => Unauthorized access  
+			  500 => Server-side error  
   - For more information about [Postman](https://www.postman.com/)
 - **Backend Server:**  
 	 The server handles authentication, data retrieval, and data synchronization between Google Fit, Fitbit, and the user's account.
