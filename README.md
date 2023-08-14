@@ -18,37 +18,37 @@ The objective of this task is to Create a robust and secure integration between 
 - **Packages:**
 	- **Babel**:  
 	For running JS code in ES6 JS.  
-			`npm i @babel/node @babel/core @babel/preset-env`
+	`npm i @babel/node @babel/core @babel/preset-env`
 	- **Jest**:  
 	For unit testing.  
-			`npm i jest`
+	`npm i jest`
 	- **Winston**:  
 	For building a logging system.  
-			`npm i winston`
+	`npm i winston`
 	- **Nodemone**:  
 	To rerun the code on every change in the code.  
-		`npm i nodemone`
+	`npm i nodemone`
 	- **config and Dotenv**:  
 	For store and retrieve env. variables.  
-		`npm i dotenv config`
+	`npm i dotenv config`
 	- **Axios**:  
 	For making http/https requests.
-		`npm i axios`
+	`npm i axios`
 	- **Bcrypt**:  
-	For hashing password
-		`npm i bcrypt`
+	For hashing password  
+	`npm i bcrypt`
 	- **Express and Express Session**:  
-	For installing express framework to build our web app. And express-session for creating sessions.
-		`npm i express express-session`
+	For installing express framework to build our web app. And express-session for creating sessions.  
+	`npm i express express-session`
 	- **Joi and Joi-ObjectId**:  
-	For validating request inputs.
-		`npm i joi joi-objectid`
+	For validating request inputs.  
+	`npm i joi joi-objectid`
 	- **Mongoose**:  
-	It is Object Relational Models (ORM) for writing MongoDB validation, casting and business logic boilerplate.
-		`npm i mongoose`
+	It is Object Relational Models (ORM) for writing MongoDB validation, casting and business logic boilerplate.  
+	`npm i mongoose`
 	- **Passport and Passport-Google-OAuth-20**:  
-	For Authentication and retrieve tokens and refresh tokens.
-		`npm i passport passport-google-oauth20`
+	For Authentication and retrieve tokens and refresh tokens.  
+	`npm i passport passport-google-oauth20`
 
 ### System Architecture Overview
 - **Postman:**  
