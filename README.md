@@ -9,46 +9,49 @@
 The objective of this task is to Create a robust and secure integration between Google Fit and Fitbit, allowing users to seamlessly sync and access their health data across both platforms. The integration should be implemented using APIs, focusing on proper authentication mechanisms, data privacy, and the ability for users to revoke the connection at any time.
 
 ### Tools used:
-- **Postman:** For building and using APIs.
-- **Back-end:** Node JS, Express JS.
-- **Database:** MongoDB. Mongoose(ORM).
+- **Postman:**  
+  For building and using APIs.
+- **Back-end:**   
+  Node JS, Express JS.
+- **Database:**  
+  MongoDB. Mongoose(ORM).
 - **Packages:**
-	- **Babel**: 
+	- **Babel**:  
 	For running JS code in ES6 JS.  
-			`npm i @babel/node @babel/core @babel/preset-env`
-	- **Jest**: 
+			`npm i **@babel/node @babel/core @babel/preset-env**`
+	- **Jest**:  
 	For unit testing.  
-			`npm i jest`
-	- **Winston**: 
+			`npm i **jest**`
+	- **Winston**:  
 	For building a logging system.  
-			`npm i winston`
-	- **Nodemone**: 
+			`npm i **winston**`
+	- **Nodemone**:  
 	To rerun the code on every change in the code.  
-		`npm i nodemone`
-	- **config and Dotenv**: 
+		`npm i **nodemone**`
+	- **config and Dotenv**:  
 	For store and retrieve env. variables.  
-		`npm i dotenv config`
-	- **Axios**:
+		`npm i **dotenv config**`
+	- **Axios**:  
 	For making http/https requests.
-		`npm i axios`
-	- **Bcrypt**: 
+		`npm i **axios**`
+	- **Bcrypt**:  
 	For hashing password
-		`npm i bcrypt`
-	- **Express and Express Session**: 
+		`npm i **bcrypt**`
+	- **Express and Express Session**:  
 	For installing express framework to build our web app. And express-session for creating sessions.
-		`npm i express express-session`
-	- **Joi and Joi-ObjectId**: 
+		`npm i **express express-session**`
+	- **Joi and Joi-ObjectId**:  
 	For validating request inputs.
-		`npm i joi joi-objectid`
-	- **Mongoose**: 
+		`npm i **joi joi-objectid**`
+	- **Mongoose**:  
 	It is Object Relational Models (ORM) for writing MongoDB validation, casting and business logic boilerplate.
-		`npm i mongoose`
-	- **Passport and Passport-Google-OAuth-20**: 
+		`npm i **mongoose**`
+	- **Passport and Passport-Google-OAuth-20**:  
 	For Authentication and retrieve tokens and refresh tokens.
-		`npm i passport passport-google-oauth20`
+		`npm i **passport passport-google-oauth20**`
 
 ### System Architecture Overview
-- **Postman**.
+- **Postman:**  
 	Provided a collection of all the APIs, which are:
 	- **User Authentication End-Points**:
 	  - Login:
@@ -57,8 +60,8 @@ The objective of this task is to Create a robust and secure integration between 
 		  - Request Body:
 			  ```json
 			  {
-				  email: "email",
-				  password: "password"
+				  "email": "email",
+				  "password": "password"
 			  }
 			  ```
 		  - Response:  
@@ -72,10 +75,10 @@ The objective of this task is to Create a robust and secure integration between 
 		  - Request Body:
 			  ```json
 			  {
-				  firstName: "name",
-				  lastName: "name",
-				  email: "email",
-				  password: "password"
+				  "firstName": "name",
+				  "lastName": "name",
+				  "email": "email",
+				  "password": "password"
 			  }
 			  ```
 		  - Response:  
@@ -88,8 +91,8 @@ The objective of this task is to Create a robust and secure integration between 
 		  - Request Header:
 			  ``` json
 			  {
-				USER_TOKEN: "Bearer <token>",
-				USER_REFRESH_TOKEN: "Brearer <token>"
+				"USER_TOKEN": "Bearer <token>",
+				"USER_REFRESH_TOKEN": "Brearer <token>"
 				}
 			  ```
 		  - Response:  
@@ -101,8 +104,8 @@ The objective of this task is to Create a robust and secure integration between 
 		  - Request Header:
 			  ``` json
 				{
-				USER_TOKEN: "Bearer <token>",
-				USER_REFRESH_TOKEN: "Brearer <token>"
+				"USER_TOKEN": "Bearer <token>",
+				"USER_REFRESH_TOKEN": "Brearer <token>"
 				}
 			  ```
 				   
@@ -131,18 +134,18 @@ The objective of this task is to Create a robust and secure integration between 
 		  - Request Header:
 			  ``` json
 				{
-				USER_TOKEN: "Bearer <token>",
-				USER_REFRESH_TOKEN: "Brearer <token>"
+				"USER_TOKEN": "Bearer <token>",
+				"USER_REFRESH_TOKEN": "Brearer <token>"
 				}
 			  ```
 		  - Request body:
 			  ``` json
 			  {
-				  userID: "<ObjectID: ID>",
-				  dataTypes: "<Array of Strings: data types name>",
-				  groupByTime: "<String: one of the following (day, week, month)>",
-				  startTime: "<String: format 'yyyy-mm-dd' => The starting date to fetch data.>",
-				  endTime: "<String: format 'yyyy-mm-dd' => The last date to fetch data.>"
+				  "userID": "<ObjectID: ID>",
+				  "dataTypes": "<Array of Strings: data types name>",
+				  "groupByTime": "<String: one of the following (day, week, month)>",
+				  "startTime": "<String: format 'yyyy-mm-dd' => The starting date to fetch data.>",
+				  "endTime": "<String: format 'yyyy-mm-dd' => The last date to fetch data.>"
 			  }
 			  ```
 		  - Response: 
@@ -173,9 +176,9 @@ The objective of this task is to Create a robust and secure integration between 
 			  401 => Unauthorized access
 			  500 => Server-side error 
   - For more information about [Postman](https://www.postman.com/)
-- **Backend Server**:  
+- **Backend Server:**  
 	 The server handles authentication, data retrieval, and data synchronization between Google Fit, Fitbit, and the user's account.
-- **Google Fit and Fitbit APIs**:
+- **Google Fit and Fitbit APIs:**  
 	 The APIs provided by Google Fit and Fitbit allow access to user health and fitness data.
 ### Integration Flow:
 - **User Authentication**:
