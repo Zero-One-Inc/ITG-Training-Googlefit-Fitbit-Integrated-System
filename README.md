@@ -92,7 +92,7 @@ The objective of this task is to Create a robust and secure integration between 
 			  ``` json
 			  {
 				"USER_TOKEN": "Bearer <token>",
-				"USER_REFRESH_TOKEN": "Brearer <token>"
+				"USER_REFRESH_TOKEN": "Bearer <token>"
 				}
 			  ```
 		  - Response:  
@@ -105,7 +105,7 @@ The objective of this task is to Create a robust and secure integration between 
 			  ``` json
 				{
 				"USER_TOKEN": "Bearer <token>",
-				"USER_REFRESH_TOKEN": "Brearer <token>"
+				"USER_REFRESH_TOKEN": "Bearer <token>"
 				}
 			  ```
 				   
@@ -135,7 +135,7 @@ The objective of this task is to Create a robust and secure integration between 
 			  ``` json
 				{
 				"USER_TOKEN": "Bearer <token>",
-				"USER_REFRESH_TOKEN": "Brearer <token>"
+				"USER_REFRESH_TOKEN": "Bearer <token>"
 				}
 			  ```
 		  - Request body:
