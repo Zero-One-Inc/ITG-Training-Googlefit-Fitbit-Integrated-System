@@ -32,7 +32,7 @@ The objective of this task is to Create a robust and secure integration between 
 	For store and retrieve env. variables.  
 	`npm i dotenv config`
 	- **Axios**:  
-	For making http/https requests.
+	For making http/https requests.  
 	`npm i axios`
 	- **Bcrypt**:  
 	For hashing password  
