@@ -82,9 +82,9 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response:  
-			  200 => success
-			  400 => Bad request
-			  500 => Server-side error
+			  200 => success  
+			  400 => Bad request  
+			  500 => Server-side error  
 	  - Logout:
 		  - URL: "http://localhost:3000/auth/user"
 		  - Method: DELETE
