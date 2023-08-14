@@ -159,7 +159,7 @@ The objective of this task is to Create a robust and secure integration between 
 					{"cyclingPedalingCadence": "-1"},
 					{"cyclingPedalingCumulative": "-1"},
 					{"heartPoints": "22.00"},
-					...
+					//...
 					],
 					"2023-08-07": [
 					{"activity": "7.00"},
@@ -168,7 +168,7 @@ The objective of this task is to Create a robust and secure integration between 
 					{"cyclingPedalingCadence": "-1"},
 					{"cyclingPedalingCumulative": "-1"},
 					{"heartPoints": "8.00"},
-					...
+					//...
 				], 
 			  }
 			   ```
