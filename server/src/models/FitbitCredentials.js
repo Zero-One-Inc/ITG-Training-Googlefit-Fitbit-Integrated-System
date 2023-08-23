@@ -1,7 +1,8 @@
 
 import mongoose from "mongoose";
+import User from "./Users";
 
-const googleFitCredentialSchema = new mongoose.Schema({
+const fitbitCredentialSchema = new mongoose.Schema({
     accessToken: {
         type: String,
     },
@@ -19,6 +20,6 @@ const googleFitCredentialSchema = new mongoose.Schema({
     }
 });
 
-const GoogleFitCredential = mongoose.model("GoogleFitCredential", googleFitCredentialSchema);
+const FitbitCredential = mongoose.model("FitbitCredential", fitbitCredentialSchema);
 
-export default GoogleFitCredential;
+export default FitbitCredential;

@@ -1,7 +1,7 @@
 
 import express from "express";
 import { validateRegistration, validateLogin } from "../middlewares/validation/user.js";
-import {register, login, logout, deleteUser} from "../controllers/userAuthController.js";
+import {register, login, logout, deleteUser, updateUserInfo} from "../controllers/userAuthController.js";
 import verifyUserToken from "../middlewares/userAuth.js";
 
 const router = express.Router();
@@ -19,6 +19,11 @@ router.post("/login",
 router.post("/logout", 
     async (req, res, next) => await verifyUserToken(req, res, next),
     async (req, res) => await logout (req, res) 
+);
+
+router.put("/", 
+    async (req, res, next) => await verifyUserToken(req, res, next),
+    async (req, res) => await updateUserInfo(req, res)
 );
 
 router.delete("/", 

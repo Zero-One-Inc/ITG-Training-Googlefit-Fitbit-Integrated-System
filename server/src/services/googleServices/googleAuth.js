@@ -29,7 +29,7 @@ const googleStrategy = async (userID) => {
                 await googleFitCredential.save();
                 
                 const message = "Google Fit credential saved successfully.";
-                logger.info(200, message);
+                logger.info(formateLoggerMessage(200, message));
 
                 return verifyCallback(null, googleFitCredential);
             }
@@ -37,7 +37,7 @@ const googleStrategy = async (userID) => {
             return verifyCallback(null, accessToken);
         } catch (error) {
             const errorMessage = "Google Fit credential error: " + error.message;;
-            logger.info(500, errorMessage);
+            logger.info(formateLoggerMessage(500, errorMessage));
 
             return verifyCallback(error, null);
         }
@@ -84,7 +84,7 @@ export const getNewGoogleAccessToken = async (googleFitCredential) => {
 
 export const revokeGoogleFitCredentials = async(userID) => {
     try {
-        let googleFitCredential = await GoogleFitCredential
+        const googleFitCredential = await GoogleFitCredential
         .findOne({userID: userID})
         .sort("date")
 

@@ -72,7 +72,7 @@ export const login = async (req, res) => {
         }
     }
 
-    logger.info(formatMessage(200, result.message));
+    logger.info(formateLoggerMessage(200, result.message));
     res.status(200).send(result);
 }
 
@@ -84,7 +84,7 @@ export const logout = async (req, res) => {
         logger.info(formatMessage(200, message));
         res.status(200).send(message);
     } catch (error) {
-        logger.error(formatMessage(500, error.message));
+        logger.error(formateLoggerMessage(500, error.message));
         res.status(500).send(error.message);
     }
 }
@@ -104,6 +104,37 @@ export const deleteUser = async (req, res) => {
         const message = "User deleted successfully";
         logger.info(formateLoggerMessage(200, message));
         res.status(200).redirect("/register");
+
+        return true;
+    } catch (error) {
+        logger.error(formateLoggerMessage(500, error.message));
+        res.status(500).send(error.message);
+    }
+}
+
+export const updateUserInfo = async (req, res) => {
+    try {
+        const user = await User.findById({_id: req.user.userID});
+
+        if (!user){
+            const errorMessage = "This user doesn't exist.";
+            logger.error(formateLoggerMessage(404, errorMessage));
+            return res.status(404).send(errorMessage);
+        }
+
+        if (req.body.firstName) {
+            user.firstName = req.body.firstName;
+        }
+
+        if (req.body.lastName) {
+            user.lastName = req.body.lastName;
+        }
+        
+        await user.save();
+
+        const message = "User updated successfully";
+        logger.info(formateLoggerMessage(200, message));
+        res.status(200).send(message);
 
         return true;
     } catch (error) {

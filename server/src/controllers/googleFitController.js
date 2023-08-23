@@ -17,7 +17,6 @@ const getGoogleFitData = async (req, res) => {
         }
 
         const dataTypes = req.body.dataTypes;
-        const GOOGLE_FIT_DATA_TYPES = Object.keys(JSON.parse(config.get("GOOGLE_DATA_TYPE_NAME")));
 
         const groupByTime = new Object(JSON.parse(config.get("GROUP_TIME_BY")))[req.body.groupByTime];
         const fetchedData = {};
