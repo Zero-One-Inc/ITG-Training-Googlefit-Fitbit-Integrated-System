@@ -88,7 +88,7 @@ The objective of this task is to Create a robust and secure integration between 
 ### Security Measures:
 - **Secure Communication**:
 	- Implement HTTPS for all communication between the User Interface, backend server, and APIs to ensure data integrity and confidentiality.
-	- One of the popular SSLs: [OpenSSL](https://www.openssl.org/) => Didn't implement it yet.
+	- One of the popular SSLs: [OpenSSL](https://www.openssl.org/)
 - **OAuth 2.0**:
 	- Use OAuth 2.0 for user authentication and access token retrieval from Google Fit and Fitbit apps, enabling secure authorization without sharing user credentials.
 	- For more information about [REST API | Google Fit | Google for Developers](https://developers.google.com/fit/rest/v1/get-started)
