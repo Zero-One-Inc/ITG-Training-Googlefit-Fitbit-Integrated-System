@@ -18,37 +18,37 @@ The objective of this task is to Create a robust and secure integration between 
 - **Packages:**
 	- **Babel**:  
 	For running JS code in ES6 JS.  
-			`npm i @babel/node @babel/core @babel/preset-env`
+	`npm i @babel/node @babel/core @babel/preset-env`
 	- **Jest**:  
 	For unit testing.  
-			`npm i jest`
+	`npm i jest`
 	- **Winston**:  
 	For building a logging system.  
-			`npm i winston`
+	`npm i winston`
 	- **Nodemone**:  
 	To rerun the code on every change in the code.  
-		`npm i nodemone`
+	`npm i nodemone`
 	- **config and Dotenv**:  
 	For store and retrieve env. variables.  
-		`npm i dotenv config`
+	`npm i dotenv config`
 	- **Axios**:  
-	For making http/https requests.
-		`npm i axios`
+	For making http/https requests.  
+	`npm i axios`
 	- **Bcrypt**:  
-	For hashing password
-		`npm i bcrypt`
+	For hashing password  
+	`npm i bcrypt`
 	- **Express and Express Session**:  
-	For installing express framework to build our web app. And express-session for creating sessions.
-		`npm i express express-session`
+	For installing express framework to build our web app. And express-session for creating sessions.  
+	`npm i express express-session`
 	- **Joi and Joi-ObjectId**:  
-	For validating request inputs.
-		`npm i joi joi-objectid`
+	For validating request inputs.  
+	`npm i joi joi-objectid`
 	- **Mongoose**:  
-	It is Object Relational Models (ORM) for writing MongoDB validation, casting and business logic boilerplate.
-		`npm i mongoose`
+	It is Object Relational Models (ORM) for writing MongoDB validation, casting and business logic boilerplate.  
+	`npm i mongoose`
 	- **Passport and Passport-Google-OAuth-20**:  
-	For Authentication and retrieve tokens and refresh tokens.
-		`npm i passport passport-google-oauth20`
+	For Authentication and retrieve tokens and refresh tokens.  
+	`npm i passport passport-google-oauth20`
 
 ### System Architecture Overview
 - **Postman:**  
@@ -65,10 +65,10 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response:  
-			  200 => success
-			  400 => Bad request 
-			  404 => User doesn't exist.
-			  500 => Server-side error
+			  200 => success  
+			  400 => Bad request  
+			  404 => User doesn't exist.  
+			  500 => Server-side error  
 	  - Register:
 		  - URL: "http://localhost:3000/auth/user/register"
 		  - Method: POST
@@ -82,9 +82,9 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response:  
-			  200 => success
-			  400 => Bad request
-			  500 => Server-side error
+			  200 => success  
+			  400 => Bad request  
+			  500 => Server-side error  
 	  - Logout:
 		  - URL: "http://localhost:3000/auth/user"
 		  - Method: DELETE
@@ -96,8 +96,8 @@ The objective of this task is to Create a robust and secure integration between 
 				}
 			  ```
 		  - Response:  
-			  200 => success
-			  500 => Server-side error
+			  200 => success  
+			  500 => Server-side error  
 	  - Delete:
 		  - URL: "http://localhost:3000/auth/user/logout:userID"
 		  - Method: DELETE
@@ -110,8 +110,8 @@ The objective of this task is to Create a robust and secure integration between 
 			  ```
 				   
 		  - Response:  
-			  200 => success
-			  500 => Server-side error
+			  200 => success  
+			  500 => Server-side error  
   - **Google Authentication End-Points:**
 	  - Create Google Fit Credentials:
 		  - URLs:  
@@ -149,7 +149,7 @@ The objective of this task is to Create a robust and secure integration between 
 			  }
 			  ```
 		  - Response: 
-			  200 => success
+			  200 => success  
 			  ``` json
 			  {
 				"2023-08-06": [
@@ -172,9 +172,9 @@ The objective of this task is to Create a robust and secure integration between 
 				], 
 			  }
 			   ```
-			  400 => bad request
-			  401 => Unauthorized access
-			  500 => Server-side error 
+			  400 => bad request  
+			  401 => Unauthorized access  
+			  500 => Server-side error  
   - For more information about [Postman](https://www.postman.com/)
 - **Backend Server:**  
 	 The server handles authentication, data retrieval, and data synchronization between Google Fit, Fitbit, and the user's account.
