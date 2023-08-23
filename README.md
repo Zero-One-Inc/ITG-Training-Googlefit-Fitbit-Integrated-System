@@ -69,7 +69,6 @@ The objective of this task is to Create a robust and secure integration between 
 
 - **Access Token and Refresh Token Retrieval**:
 	- Upon successful authentication, the backend server receives access and refresh tokens for Google Fit or Fitbit APIs.
-	- 
 - **Data Retrieval and Synchronization**:
 	- The backend server uses the obtained access tokens to request health data from APIs that the user has connected with.
 	- The server processes and synchronizes the data, ensuring data consistency and mapping these data as a unified data format for both platforms.
@@ -78,10 +77,8 @@ The objective of this task is to Create a robust and secure integration between 
 	- The data format by date “YYYY-MM-dd” and each date has a set of Health fields, each Health field should have a string value of integer or float number. Integers and floats should have two precision numbers. As mentioned before. 
 ### Data Flow:
 - **Google Fit Data Types:**  
-	Didn't finished implementing all data retrieval.
 	- To read more about [Google Fit Data types](https://developers.google.com/fit/datatypes).
 - **Fitbit Data Types:**  
-	Didn't finished implementing all data retrieval.
 	- To read more about [Fitbit data types](https://dev.fitbit.com/build/reference/web-api/).
 - **API Request**:
 	- The backend server requests user health data from the Google Fit or Fitbit APIs using the access token.
@@ -91,7 +88,7 @@ The objective of this task is to Create a robust and secure integration between 
 ### Security Measures:
 - **Secure Communication**:
 	- Implement HTTPS for all communication between the User Interface, backend server, and APIs to ensure data integrity and confidentiality.
-	- One of the popular SSLs: [OpenSSL](https://www.openssl.org/) => Didn't implement it yet.
+	- One of the popular SSLs: [OpenSSL](https://www.openssl.org/)
 - **OAuth 2.0**:
 	- Use OAuth 2.0 for user authentication and access token retrieval from Google Fit and Fitbit apps, enabling secure authorization without sharing user credentials.
 	- For more information about [REST API | Google Fit | Google for Developers](https://developers.google.com/fit/rest/v1/get-started)
@@ -248,5 +245,8 @@ The objective of this task is to Create a robust and secure integration between 
 			  401 => Unauthorized access  
 			  500 => Server-side error  
   - For more information about [Postman](https://www.postman.com/)
-
-Didn't Implement unit testing.
+# Missings: 
+- Didn't Implement unit testing.
+- Didn't finish implementing all data retrieval for Google Fit and Fitbit.
+- Didn't implement unit testing.
+- Didn't implement SSL.
