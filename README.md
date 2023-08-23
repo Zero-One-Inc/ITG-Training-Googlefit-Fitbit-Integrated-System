@@ -248,5 +248,5 @@ The objective of this task is to Create a robust and secure integration between 
 # Missings: 
 - Didn't Implement unit testing.
 - Didn't finish implementing all data retrieval for Google Fit and Fitbit.
-- Didn't implement unit testing.
+- Didn't Implement data maping for Fitbit data retrieval.
 - Didn't implement SSL.
