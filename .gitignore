@@ -1,0 +1,12 @@
+**/node_modules/
+**/package-lock.json
+**/*.env
+**/logs
+**/coverage/
+**/sonar-project.properties
+**/.scannerwork
+**/*.log
+**/config
+**/custom-environment-variables.json
+**/text.txt
+**/tmp.json
